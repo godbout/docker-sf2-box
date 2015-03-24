@@ -2,9 +2,10 @@ FROM ubuntu:14.04
 MAINTAINER Guillaume Leclerc <guill.bout@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-
+	
 RUN apt-get update && \
-	apt-get install -y supervisor nginx php5-fpm php5-cli mysql-server php5-mysql pwgen
+	apt-get install -y curl supervisor gitm pwgen \
+	nginx php5-fpm php5-cli mysql-server php5-mysql 
 
 # Clean image
 RUN apt-get clean && \
