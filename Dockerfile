@@ -4,12 +4,17 @@ MAINTAINER Guillaume Leclerc <guill.bout@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 	
 RUN apt-get update && \
-	apt-get install -y curl supervisor gitm pwgen \
+	apt-get install -y curl supervisor git pwgen \
 	nginx php5-fpm php5-cli mysql-server php5-mysql 
 
 # Clean image
 RUN apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
+
+# Installing the Symfony Installer
+RUN curl -LsS http://symfony.com/installer > symfony.phar
+RUN mv symfony.phar /usr/local/bin/symfony
+RUN chmod a+x /usr/local/bin/symfony
 
 # Supervisord conf
 ADD supervisord/nginx.conf /etc/supervisor/conf.d/nginx.conf
